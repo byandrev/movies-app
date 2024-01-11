@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 
 import { searchMovie } from "../services/moviesService"
 import debounce from "just-debounce-it"
@@ -8,9 +8,14 @@ function useMovies({ title, isSort }) {
   const [movies, setMovies] = useState([])
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const previousSearch = useRef(title)
 
   const handleSearch = useCallback(({ title }) => {
+    // Avoid fetchs
+    if (isLoading || previousSearch.current === title) return
+
     setIsLoading(true)
+    previousSearch.current = title
 
     searchMovie({ title })
       .then(data => {
