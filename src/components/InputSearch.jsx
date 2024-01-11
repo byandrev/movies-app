@@ -5,7 +5,7 @@ function InputSearch({ title, setTitle, handleSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSearch();
+    handleSearch({ title });
   }
 
   return (

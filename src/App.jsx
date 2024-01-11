@@ -1,40 +1,13 @@
 import { useState } from "react"
+
 import Header from "./components/Header"
 import ListOfMovies from "./components/ListOfMovies"
 import Footer from "./components/Footer"
-
-import { searchMovie } from "./services/moviesService"
+import useMovies from "./hooks/useMovies"
 
 function App() {
   const [title, setTitle] = useState("")
-  const [movies, setMovies] = useState([])
-  const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleSearch = () => {
-    setIsLoading(true)
-
-    searchMovie({ title })
-      .then(data => {
-        console.log(data)
-
-
-        if (data.Response === "True") {
-          setMovies(data.Search)
-          setError(null)
-        } else {
-          throw new Error("Error to get movies")
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false)
-        setError(err.message)
-        setMovies([])
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }
+  const { movies, error, isLoading, handleSearch } = useMovies({ title })
 
   return (
     <div className="App">
