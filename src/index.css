@@ -1,0 +1,155 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  --primary-color: #3700B3;
+  --primary-alt-color: #3700B3aa;
+  --error-color: #B00020;
+  --border-color: #aaaaaa11;
+  --text-alt-color: #ffffffaa;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input,
+button {
+  padding: .7rem 1.3rem;
+  font-family: inherit;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+.Error {
+  color: var(--error-color);
+  text-align: center;
+}
+
+.animate__fadeIn {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+
+.App {
+  width: 90%;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Header {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.Header-Title {
+  margin-bottom: 1rem;
+}
+
+.Form-InputSearch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.Form-InputSearch input {
+  min-width: 200px;
+  max-width: 400px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: background 200ms;
+}
+
+.Form-InputSearch input:focus {
+  background-color: white;
+  box-shadow: 0 5px 10px 0 #00000055;
+}
+
+.GridMovies {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  row-gap: 1rem;
+  column-gap: 3rem;
+}
+
+.MovieCard {
+  cursor: pointer;
+
+}
+
+
+.MovieCard-Poster {
+  display: block;
+  min-height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: .3rem;
+  transition: transform 500ms;
+}
+
+.MovieCard-Content {
+  visibility: hidden;
+  margin-top: 1.5rem;
+}
+
+
+.MovieCard:hover .MovieCard-Content {
+  visibility: visible;
+}
+
+.MovieCard:hover .MovieCard-Poster {
+  transform: scale(1.1);
+  box-shadow: 0 5px 20px 0 #000000aa;
+}
+
+.Button {
+  background-color: var(--primary-color);
+  color: var(--color);
+  cursor: pointer;
+  transition: background 200ms;
+}
+
+.Button:hover {
+  background-color: var(--primary-alt-color);
+  box-shadow: 0 5px 10px 0 #00000055;
+}
+
+.Footer {
+  margin-top: 4rem;
+  border-top: 2px solid var(--border-color);
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--text-alt-color);
+}
