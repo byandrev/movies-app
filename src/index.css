@@ -96,6 +96,15 @@ input:focus {
   box-shadow: 0 5px 10px 0 #00000055;
 }
 
+.Header-SortFilter {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--text-alt-color);
+  user-select: none;
+}
+
 .GridMovies {
   margin-top: 2rem;
   display: grid;

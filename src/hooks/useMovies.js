@@ -4,15 +4,12 @@ import { searchMovie } from "../services/moviesService"
 import debounce from "just-debounce-it"
 
 
-function useMovies({ title }) {
+function useMovies({ title, isSort }) {
   const [movies, setMovies] = useState([])
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSearch = ({ title }) => {
-    // Avoid multiples fetchs
-    // if (isLoading) return
-
+  const handleSearch = useCallback(({ title }) => {
     setIsLoading(true)
 
     searchMovie({ title })
@@ -32,7 +29,13 @@ function useMovies({ title }) {
       .finally(() => {
         setIsLoading(false)
       })
-  }
+  }, [])
+
+  const getMovies = useCallback((movies) => {
+    return isSort
+            ? [...movies].sort((a, b) => a.Title.localeCompare(b.Title))
+            : movies
+  }, [isSort, movies])
 
   const debounceGetMovies = useCallback(
     debounce((title) => {
@@ -42,13 +45,11 @@ function useMovies({ title }) {
 
   useEffect(() => {
     if (!title) return
-
-    // handleSearch()
     debounceGetMovies(title)
-  }, [title])
+  }, [title, debounceGetMovies])
 
 
-  return { movies, error, isLoading, handleSearch }
+  return { movies: getMovies(movies), error, isLoading, handleSearch }
 }
 
 export default useMovies
